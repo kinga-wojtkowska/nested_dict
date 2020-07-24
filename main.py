@@ -57,11 +57,17 @@ sales_list = [{x:{'sales':{'2016' : a, '2017' : b, '2018' : c}}} for (x, a, b, c
 
 cars_list = list(zip(brand, sales_list))
 print(type(sales_list))
-for k, v in cars_list:
+'''for k, v in cars_list:
     if k in cars.keys():
         cars[k].update({v})
     else:
-        cars[k] = {v}
+        cars[k] = {v}'''
+for k, v in cars_list:
+    if k in cars:
+        cars.setdefault(k, [])
+        cars[k].append(v)
+    else:
+        cars[k] = [v]        
 import pprint
 pp = pprint.PrettyPrinter(depth=5)
 pp.pprint(cars)
