@@ -52,16 +52,16 @@ answer5 = "" # odpowiedź podaj w formacie procentowym jako string. Np. '21%'
 cars = {}
 for b in brand:
     cars[b]={}
-
+#mniej więcej tu zaczynają się problemy
 sales_list = [{x:{'sales':{'2016' : a, '2017' : b, '2018' : c}}} for (x, a, b, c) in zip(model, sales_2016_int, sales_2017_int, sales_2018_int)]
 
 cars_list = list(zip(brand, sales_list))
 print(type(sales_list))
-'''for k, v in cars_list:
+for k, v in cars_list:
     if k in cars.keys():
         cars[k].update({v})
     else:
-        cars[k] = {v}'''
+        cars[k] = {v}
 import pprint
 pp = pprint.PrettyPrinter(depth=5)
 pp.pprint(cars)
