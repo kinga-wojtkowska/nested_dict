@@ -48,27 +48,36 @@ answer2 = "" # wskaż producenta jako string
 answer3 = [] # wskaż odpowiedź jako listę zawierającą wszystkie modele spełniające kryteria
 answer4 = "" # wskaż nazwę modelu jako string
 answer5 = "" # odpowiedź podaj w formacie procentowym jako string. Np. '21%'
-
+##################################################################################################
 cars = {}
-
+cars_1 = {}
 
 sales_list = [{x:{'sales':{'2016' : a, '2017' : b, '2018' : c}}} for (x, a, b, c) in zip(model, sales_2016_int, sales_2017_int, sales_2018_int)]
-
-cars_list = list(zip(brand, sales_list))
 print(type(sales_list))
 
-'''for k, v in cars_list:
-    if k in cars.keys():
-        cars[k].update({v})
-    else:
-        cars[k] = {v}'''
+print("to jest sales_list")
+for k in sales_list:
+    print(k)
+print(sales_list)    
+cars_list = list(zip(brand, sales_list))
+
+print("to jest cars_list")
+for k in cars_list:
+    print(k)
+       
 for k, v in cars_list:
     if k in cars:
-        cars.setdefault(k, [])
-        cars[k].append(v)
+        cars[k].extend([v])
     else:
+        cars.setdefault(k, v)
         cars[k] = [v]
-       
+x = 0
+for k, v in cars.items():
+    while cars[k][x] == True:
+        cars[k] = cars[k][x]
+        x += 1
+        break
+        
 import pprint
 pp = pprint.PrettyPrinter(depth=5)
 pp.pprint(cars)
@@ -76,8 +85,28 @@ print(type(cars))
 print(len(cars))
 print(len(brand))
 
+# ANSWER 1 ######################################
 best_2017 = max(sales_2017_int)
 ind_1 = sales_2017_int.index(best_2017)
 answer1 = str(models[ind_1])
 
 print(answer1)
+
+# ANSWER 2 ######################################
+cars_2018 = list(zip(brand, sales_2018_int))
+
+cars_2018_s = {}
+for k, v in cars_2018:
+    if k in cars_2018_s:
+        cars_2018_s[k] = cars_2018_s[k] + v
+    else:
+        cars_2018_s.setdefault(k, v)
+        cars_2018_s[k] = v
+print(cars_2018_s)
+best_2018_prod = max(cars_2018_s.values())
+for k, v in cars_2018_s.items():
+    if v == best_2018_prod:
+        answer2 = k
+print(answer2)
+
+#ANSWER 3 #######################################
